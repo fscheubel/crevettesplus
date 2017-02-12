@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  collation: en_US.UTF8 #case-sensitive with template1 Postgres database (template1 is the default template used to create databases in PG from what I gather)
+  ctype: en_US.UTF8     #case-sensitive with template1 Postgres database
+  pool: 5
+  username: <%= ENV['USERNAME'] %>
+  password: <%= ENV['PASSWORD'] %>
+
+development:
+  <<: *default
+  database: cplus_db_development
+
+test:
+  <<: *default
+  host: /var/run/postgresql
+  database: cplus_db_test
+
+production:
+  <<: *default
+  database: cplus_db_production
