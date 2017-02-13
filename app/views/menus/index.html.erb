@@ -1,0 +1,29 @@
+<%- model_class = Menu -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+
+<% @menus.each do |menu| %>
+  <div class="well">
+    <h4><%= menu.name %> <%= tag_label('Default', :info) if menu.is_default == true %></h4>
+    <div><%= menu.description %></div>
+    <% if menu.active_start != menu.active_end %>
+      <div>Active: <%= menu.active_start.try(:to_formatted_s, :time) %> - <%= menu.active_end.try(:to_formatted_s, :time) %></div>
+    <% end %>
+    <div>
+      <%= link_to t('.show', :default => t("helpers.links.show")),
+                  menu_path(menu), :class => 'btn btn-default' %>
+      <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_menu_path(menu), :class => 'btn btn-default' %>
+      <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  menu_path(menu),
+                  :method => :delete,
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'btn btn-danger' %>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_menu_path,
+            :class => 'btn btn-primary' %>

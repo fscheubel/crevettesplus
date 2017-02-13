@@ -33,6 +33,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Interface and internationalization
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'font-awesome-rails'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
+
+gem 'validates_timeliness'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
