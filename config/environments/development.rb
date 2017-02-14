@@ -38,4 +38,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  # Disables "Cannot render from console" warnings on cloud9
+  config.web_console.whiny_requests = false
 end
