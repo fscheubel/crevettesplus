@@ -5,24 +5,15 @@
   <h2><%= @menu.description %></h2>
 </div>
 
-<% @menu.menu_items.each do |menu_item| %>
-  <div class="row dish">
-    <div class="col-lg-6 name"><%= menu_item.name %></div>
-    <div class="col-lg-6 price"><%= number_to_currency(menu_item.price) %></div>
-  </div>
-  <div class="row dish">
-    <div class="col-lg-12 description"><%= menu_item.description %></div>
-  </div>
-<% end %>
+<div id="menu_items">
+  <% @menu.menu_items.each do |menu_item| %>
+    <%= render partial: 'menu_items/menu_item', locals: { menu_item: menu_item } %>
+  <% end %>
+</div>
+
+<%= render partial: 'menu_items/form' %>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               menus_path, :class => 'btn btn-default' %>
 <%= link_to 'Menu items',
               menu_menu_items_path(@menu), :class => 'btn btn-default' %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_menu_path(@menu), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              menu_path(@menu),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>

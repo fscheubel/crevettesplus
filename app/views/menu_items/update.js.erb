@@ -1,0 +1,16 @@
+<% if @menu_item.errors.any? %>
+
+  <% @menu_item.errors.each do |attribute, error| %>
+    console.log('Error: <%= @menu_item.errors.full_message(attribute, error) %>');
+  <% end %>
+  $('<%= "#edit_menu_item_#{@menu_item.id}" %>').find('.form-group:first').addClass('has-error');
+
+<% else %>
+
+  var $form = $('<%= "#edit_menu_item_#{@menu_item.id}" %>');
+  $form.find('.has-error').removeClass('has-error');
+  $form.find('#menu_item_name').blur();
+  $form.find('#menu_item_price').blur();
+  $form.find('#menu_item_description').blur();
+
+<% end %>

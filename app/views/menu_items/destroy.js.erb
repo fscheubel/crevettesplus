@@ -1,0 +1,8 @@
+$('.delete-menu-item').bind('ajax:success', function () {
+  $(this).closest('.menu-item').animate({
+    opacity: 0.0,
+    height: "toggle"
+  }, 400, function () {
+    $(this).remove();
+  });
+});

@@ -15,7 +15,7 @@ class MenuItemsController < ApplicationController
 
   # GET /menu_items/new
   def new
-    @menu_item = @menu.menu_items.build
+    @menu_item = MenuItem.new
   end
 
   # GET /menu_items/1/edit
@@ -30,9 +30,11 @@ class MenuItemsController < ApplicationController
     respond_to do |format|
       if @menu_item.save
         format.html { redirect_to @menu_item, notice: 'Menu item was successfully created.' }
+        format.js {}
         format.json { render :show, status: :created, location: @menu_item }
       else
         format.html { render :new }
+        format.js {}
         format.json { render json: @menu_item.errors, status: :unprocessable_entity }
       end
     end
@@ -44,9 +46,11 @@ class MenuItemsController < ApplicationController
     respond_to do |format|
       if @menu_item.update(menu_item_params)
         format.html { redirect_to @menu_item, notice: 'Menu item was successfully updated.' }
+        format.js {}
         format.json { render :show, status: :ok, location: @menu_item }
       else
         format.html { render :edit }
+        format.js {}
         format.json { render json: @menu_item.errors, status: :unprocessable_entity }
       end
     end
@@ -58,6 +62,7 @@ class MenuItemsController < ApplicationController
     @menu_item.destroy
     respond_to do |format|
       format.html { redirect_to menu_menu_items_path(@menu), notice: 'Menu item was successfully destroyed.' }
+      format.js {}
       format.json { head :no_content }
     end
   end

@@ -1,34 +1,26 @@
-<%= form_for @menu_item.new_record? ? [@menu, @menu_item] : @menu_item, :html => { :class => "form-horizontal" } do |f| %>
+<%= form_for @menu_item.new_record? ? [@menu, @menu_item] : @menu_item, remote: action_name == 'new' ? false : true, :html => { :class => "form-horizontal" } do |f| %>
 
   <%= render partial: 'shared/errors', locals: { object: @menu_item } %>
 
   <div class="form-group">
-    <%= f.label :name, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :name, :class => 'form-control' %>
+    <div class="col-xs-8">
+      <%= f.text_field :name, placeholder: 'Name of the menu item', :class => 'form-control' %>
     </div>
-    <%=f.error_span(:name) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :description, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :description, :class => 'form-control' %>
+    <div class="col-xs-4">
+      <%= f.number_field :price, placeholder: 'Price', value: f.object.price.blank? ? f.object.price : number_to_currency(f.object.price.to_f, delimiter: '', unit: ''), step: 0.01, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:description) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :price, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :price, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:price) %>
   </div>
 
   <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
+    <div class="col-lg-12">
+      <%= f.text_field :description, placeholder: 'Description (optional)', :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-12">
       <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                menu_menu_items_path(@menu), :class => 'btn btn-default' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")), '#hide_form', :class => 'btn btn-default' if !@menu_item.new_record? %>
     </div>
   </div>
 
